@@ -1,11 +1,15 @@
 import './Style/main.scss';
-import { Quadro } from './Componentes/Quadro';
+import { Inicial } from './paginas/Inicial';
+import {BrowserRouter} from 'react-router';
+import { Rotas } from './rotas/Rotas';
 
 function App() {
   
 
   return (
-    <Quadro/>
+    <BrowserRouter>
+      <Rotas/>
+    </BrowserRouter>
   )
 }
 
