@@ -1,6 +1,7 @@
 @use './variaveis' as *;
  
 .formularios{
+
     max-width: 600px;
     margin: 20px;
     padding: 10px;
@@ -26,7 +27,7 @@
             margin-bottom: 10px;
             color: $primary
         }
-        input{
+        input, select{
             padding: 10px;
             border: 1px solid $primary;
             border-radius: 8px;
