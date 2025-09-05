@@ -5,7 +5,6 @@ import { Rotas } from './rotas/Rotas';
 
 function App() {
   
-
   return (
     <BrowserRouter>
       <Rotas/>
