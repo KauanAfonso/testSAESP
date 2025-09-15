@@ -1,35 +1,37 @@
-
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Coluna } from "./Coluna";
 
-export function Quadro(){
+export function Quadro() {
+    const [tarefas, setTarefas] = useState([]);
 
-    const {tarefas, SetTarefas} = useState([]);
+    useEffect(() => {
+        const apiURL = `http://127.0.0.1:8000/api/tarefas/`;
 
-    //o effect é um hook que permite a renderização de alguma coisa a tela
-    useEffect(()=>{
-        const apiURL = `htpp://127.0.0.1:8000/api/tarefas/`;
-
-        //axios permite a chamada di endereço
         axios.get(apiURL)
-            .then(response => {SetTarefas(response.data)})
+            .then(response => {
+                console.log("Tarefas da API:", response.data);
+                setTarefas(response.data);
+            })
             .catch(error => {
-                console.error("Deu ruim aqui hein", error)
+                console.error("Erro ao buscar tarefas:", error);
             });
-    },[])
+    }, []);
 
-    //estou armazendo em variaveis o resultado de uma função callback 
-    const tarefasAfazer = tarefas.filter(tarefas => tarefas.status == "A Fazer");
-    const tarefasAFazendo = tarefas.filter(tarefas => tarefas.status == "A Fazendo");
-    const tarefasAPronto = tarefas.filter(tarefas => tarefas.status == "Pronto");
+    // Separando tarefas por status
+    const tarefasAfazer = tarefas.filter(tarefa => tarefa.status === "AF");
+    const tarefasAFazendo = tarefas.filter(tarefa => tarefa.status === "F");
+    const tarefasAPronto = tarefas.filter(tarefa => tarefa.status === "P");
 
-    return(
+    return (
         <main className="conteiner">
             <h1>Meu Quadro</h1>
-            <Coluna titulo="A fazer" tarefas={tarefasAfazer}/>
-            <Coluna titulo="Fazendo" tarefas={tarefasAFazendo}/>
-            <Coluna titulo="Pronto" tarefas={tarefasAPronto}/>
+            <section>
+            <Coluna titulo="A Fazer" tarefas={tarefasAfazer} />
+            <Coluna titulo="Fazendo" tarefas={tarefasAFazendo} />
+            <Coluna titulo="Pronto" tarefas={tarefasAPronto} />
+            </section>
+
         </main>
     );
 }

@@ -3,6 +3,7 @@ import { Inicial } from '../paginas/Inicial';
 import  {Quadro} from '../Componentes/Quadro';
 import { CadUsuario } from '../paginas/CadUsuario';
 import { CadTarefa} from '../paginas/CadTarefa';
+import { EditarTarefa } from '../paginas/EditarTarefa';
 
 export function Rotas(){
     return(
@@ -12,6 +13,7 @@ export function Rotas(){
              <Route index element={<Quadro/>}/>
              <Route path='cadUsuario' element={<CadUsuario/>}/>
              <Route path='cadTarefa' element={<CadTarefa/>}/>
+             <Route path = 'EditarTarefa/:id' element={<EditarTarefa/>}/>
 
             </Route>
         </Routes>
