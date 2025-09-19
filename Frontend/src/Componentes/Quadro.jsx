@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Coluna } from "./Coluna";
+import {DndContext} from '@dnd-kit/core'; //é o uso da biblioteca de clicar e arrastar
 
 export function Quadro() {
     const [tarefas, setTarefas] = useState([]);

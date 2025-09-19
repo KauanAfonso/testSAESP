@@ -45,7 +45,7 @@ export function EditarTarefa() {
       status: data.status === 'A fazer' ? 'AF' : data.status === 'Fazendo' ? 'F' : 'P',
     };
     try {
-      await axios.patch(`http://127.0.0.1:8000/api/tarefa/${id}/`, payload);
+      await axios.patch(`http://127.0.0.1:8000/api/tarefas/${id}/`, payload);
       alert('Tarefa editada com sucesso');
     } catch (err) {
       console.error('Deu ruim', err);
