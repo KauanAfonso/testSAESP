@@ -72,14 +72,14 @@ export function CadUsuario() {
         <form className="formularios" onSubmit={handleSubmit(obterdados)}>
             <h2>Cadastro do Usuário</h2>
 
-            <label>Nome:</label>
-            <input type='text' onChange={handleNomeChange} placeholder='Jose da Silva' {...register("nome")} />
+            <label htmlFor='nome'>Nome:</label>
+            <input type='text' id='nome' onChange={handleNomeChange} placeholder='Jose da Silva' {...register("nome")} />
             {/* aqui eu vejo a variavel errors no campo nome exibo a mensagem para o usuário */}
             {errors.nome && <p className='errors'>{errors.nome.message}</p>}
 
-            <label>E-mail</label>
-            <input type='email' onChange={handleEmailChange} placeholder='email@email.com' {...register("email")} />
-            {/* aqui eu vejo a variavel errors no campo nome exibo a mensagem para o usuário */}
+            <label htmlFor='email'>E-mail</label>
+            <input type='email' id='email' onChange={handleEmailChange} placeholder='email@email.com' {...register("email")} />
+            
             {errors.email && <p className='errors'>{errors.email.message}</p>}
 
             <button type='submit'>Cadastrar</button>
