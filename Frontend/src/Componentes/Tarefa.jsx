@@ -61,17 +61,24 @@ export function Tarefa({ tarefa }) {
 
         <section style={{display:"flex", gap:'1rem'}} >
         <dl>
-          <dt>Setor: </dt>
+          <dt className='subtitulo'>Setor: </dt>
           <dd>{tarefa.nomeSala}</dd>
-        </dl>
+        </dl> 
 
         <dl>
-          <dt>Prioridade: </dt>
+          <dt className='subtitulo'>Prioridade: </dt>
           <dd>
             {tarefa.prioridade === 'A' ? 'Alta' :
             tarefa.prioridade === 'M' ? 'Média' :
             tarefa.prioridade === 'B' ? 'Baixa' :
             'N/A'}
+          </dd>
+        </dl>
+
+          <dl>
+          <dt className='subtitulo'>Dono(a): </dt>
+          <dd>
+            {tarefa.nome}
           </dd>
         </dl>
         </section>
