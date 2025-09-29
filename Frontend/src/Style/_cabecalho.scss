@@ -1,11 +1,15 @@
 @use './variaveis' as *;
 
 .cabecalho{
-    background-color: $accent;
-    height: 80px;
+    background-color: $backgrond;
+    align-items: center;
     display: flex;
- 
+    padding: 2rem;
     h1{
-        color: $backgrond;
+        color: $accent;
+         text-align: center;
+    }
+    a{
+    text-decoration: none;
     }
 }

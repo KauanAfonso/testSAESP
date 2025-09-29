@@ -1,8 +1,12 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@300..700&display=swap');
+
 $backgrond: #f4f7f9;
-$primary:#1a2b3c; 
-$secondary: #7c8c9a; 
-$accent:#00647a; 
-$button:orange;
+$primary:#3c1a31; 
+$secondary: #f4f7f9f3; 
+$accent:#003d4b; 
+$button:rgb(255, 251, 0);
+
 
 $text-primary:$backgrond;
 $text-background:$primary;
@@ -15,10 +19,24 @@ $font-size:16px;
     box-sizing: border-box;
 }
 
+
+
 body{
     background-color: $primary;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    height: 400;
+    font-style: normal;
 }
 
-h2{
+h2,h1{
     color: $backgrond;
+
+}
+.inicialTitulo{
+        font-size: 26px;
+        color:$backgrond;
+        text-align: center;
+        margin: 2rem;
+        font-style: bold;
 }

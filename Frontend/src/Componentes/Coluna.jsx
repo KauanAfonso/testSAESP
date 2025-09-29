@@ -1,8 +1,15 @@
 import { Tarefa } from "./Tarefa";
 import { useDroppable } from "@dnd-kit/core";
 
+
+/* 
+
+Esse componente é responsável por ser as colunas do
+Kanban.
+
+*/
 export function Coluna({titulo, tarefas=[], id}){
-    //fazendo o controle do ambiente de soltura
+  //fazendo o controle do ambiente de soltura
   const { setNodeRef } = useDroppable({ id })
 
     return(

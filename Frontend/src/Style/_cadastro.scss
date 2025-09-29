@@ -1,10 +1,9 @@
 @use './variaveis' as *;
  
 .formularios{
-
     max-width: 600px;
     margin: 20px auto;
-    padding: 2rem;
+    padding: 3rem;
     background-color: $backgrond;
     border-radius: 10px;
     display: flex;

@@ -11,7 +11,8 @@ const schemaCadUsuario = z.object({
         .regex(
             /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/,
             "Digite nome completo (nome e sobrenome), sem números ou símbolos, sem espaços no início/fim"
-        ),
+        )
+        .regex(/^[^\s].*$/, 'Não comece com espaço em branco'),
     email: z.string()
         .min(1, 'Insira seu email')
         .max(30, 'Insira um endereço de email com até 30 carateres')
@@ -69,9 +70,9 @@ export function CadUsuario() {
 
 
     return (
+        <section>
+        <h2 className='inicialTitulo'> Cadastro do Usuário</h2> 
         <form className="formularios" onSubmit={handleSubmit(obterdados)}>
-            <h2>Cadastro do Usuário</h2>
-
             <label htmlFor='nome'>Nome:</label>
             <input type='text' id='nome' onChange={handleNomeChange} placeholder='Jose da Silva' {...register("nome")} />
             {/* aqui eu vejo a variavel errors no campo nome exibo a mensagem para o usuário */}
@@ -84,5 +85,7 @@ export function CadUsuario() {
 
             <button type='submit'>Cadastrar</button>
         </form>
+        </section>
+
     )
 }

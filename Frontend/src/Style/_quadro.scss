@@ -6,15 +6,13 @@
     padding:10px;
     display: flex;
     flex-direction: column;
-    gap:2px;
-    background-color:$secondary;
-
-    h1{
-        font-size: 26px;
-        color:$backgrond;
-    }
-
+    gap:5px;
+    padding: 0rem;
+    // background-color:$secondary;
+    overflow: hidden;
     section{
         display: flex;
+        gap: .5rem;
+
     }
 }

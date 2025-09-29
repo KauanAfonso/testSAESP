@@ -8,11 +8,11 @@ import { useEffect, useState } from 'react';
 const schemaCadTarefa = z.object({
     descricao: z.string()
         .min(1, 'Insira ao menos 1 caractere')
-        .max(150, 'Insira até 250 caracteres')
+        .max(100, 'Insira até 100 caracteres')
         .regex(/^[^\s].*$/, 'Não comece com espaço em branco'),
     nomeSala: z.string()
-        .min(1, 'Insira o nome da sala com pelo menos 1 caracteres')
-        .max(155, 'Insira um endereço de email com até 155 carateres')
+        .min(1, 'Insira o setor com pelo menos 1 caracteres')
+        .max(50, 'Insira o setor com até 50 carateres')
         .regex(/^[^\s].*$/, 'Não comece com espaço em branco'),
     prioridade: z.string()
         .min(1, "Defina a prioridade")
@@ -23,7 +23,15 @@ const schemaCadTarefa = z.object({
 
     //Mandar a data corretamente para o backend    
     dataCadastro: z.string()
-        .regex(/^\d{4}-\d{2}-\d{2}$/, "Data inválida. Use o formato YYYY-MM-DD"),
+        .regex(/^\d{4}-\d{2}-\d{2}$/, "Data inválida. Use o formato YYYY-MM-DD")
+        .refine((dateStr) => {
+            const year = parseInt(dateStr.split('-')[0], 10);
+            return year >= 2000;
+        }, {
+            message: "A data deve ser do ano 2000 para frente",
+        }),
+
+    id_usuario: z.string().transform(val => parseInt(val, 10)),
     id_usuario: z.string().transform(val => parseInt(val, 10)),
 
 })
@@ -56,13 +64,13 @@ export function CadTarefa() {
         }
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         async function getUsers() {
-            try{
+            try {
                 const res = await axios.get("http://127.0.0.1:8000/api/usuario/")
                 setUsuarios(res.data)
-            
-            }catch(error){
+
+            } catch (error) {
                 console.log("Erros", error)
             }
         }
@@ -70,53 +78,55 @@ export function CadTarefa() {
         getUsers()
     }, [usuarios]);
 
-    
+
 
     return (
-        <form className="formularios" onSubmit={handleSubmit(obterdados)}>
-            <h2>Cadastro do tarefas</h2>
+        <section>
+            <h2 className='inicialTitulo'>Cadastro de Tarefas</h2>
+            <form className="formularios" onSubmit={handleSubmit(obterdados)}>
 
-            <label>Descrição da Tarefa:</label>
-            <input type='text' placeholder='Descrição da tarefa' {...register("descricao")} required />
-            {/* aqui eu vejo a variavel errors no campo descricao exibo a mensagem para o usuário */}
-            {errors.descricao && <p className='errors'>{errors.descricao.message}</p>}
+                <label htmlFor="descricao">Descrição da Tarefa:</label>
+                <input id="descricao" type="text" placeholder="Descrição da tarefa" {...register("descricao")} required />
+                {errors.descricao && <p className="errors">{errors.descricao.message}</p>}
 
-            <label>Nome da sala:</label>
-            <input type='text'  placeholder='A102' {...register("nomeSala")} required/>
-            {/* aqui eu vejo a variavel errors no campo nome exibo a mensagem para o usuário */}
-            {errors.nomeSala && <p className='errors'>{errors.nomeSala.message}</p>}
+                <label htmlFor="nomeSala">Nome da sala:</label>
+                <input id="nomeSala" type="text" placeholder="A102" {...register("nomeSala")} required />
+                {errors.nomeSala && <p className="errors">{errors.nomeSala.message}</p>}
 
-            <label>Defina prioridade:</label>
-            <select {...register("prioridade")} required>
-                <option value="B">Baixa</option>
-                <option value="M">Media</option>
-                <option value="A">Alta</option>
-            </select>
-            {errors.prioridade && <p className='errors'>{errors.prioridade.message}</p>}
+                <label htmlFor="prioridade">Defina prioridade:</label>
+                <select id="prioridade" {...register("prioridade")} required>
+                    <option value="B">Baixa</option>
+                    <option value="M">Média</option>
+                    <option value="A">Alta</option>
+                </select>
+                {errors.prioridade && <p className="errors">{errors.prioridade.message}</p>}
 
-            <label>Defina o status:</label>
-            <select {...register("status")} required disabled>
-                <option value="AF">A Fazer</option>
-                <option value="F">Fazendo</option>
-                <option value="P">Pronto</option>
-            </select>
-            {errors.status && <p className='errors'>{errors.status.message}</p>}
+                <label htmlFor="status">Defina o status:</label>
+                <select id="status" {...register("status")} required disabled>
+                    <option value="AF">A Fazer</option>
+                    <option value="F">Fazendo</option>
+                    <option value="P">Pronto</option>
+                </select>
+                {errors.status && <p className="errors">{errors.status.message}</p>}
 
-            <label>Data da tarefa:</label>
-            <input type="date" name="" id=""  {...register("dataCadastro")} required />
-            {errors.dataCadastro && <p className='errors'>{errors.dataCadastro.message}</p>}
+                <label htmlFor="dataCadastro">Data da tarefa:</label>
+                <input id="dataCadastro" type="date" {...register("dataCadastro")} required />
+                {errors.dataCadastro && <p className="errors">{errors.dataCadastro.message}</p>}
 
-            <label>Responsável:</label>
-            <select {...register("id_usuario")} required >
-            {usuarios.map((user)=>{
-                return(
-                    <option  key={user.id} value={user.id}>{user.nome}</option>
-                )
-            })}
-            </select>
-            {errors.id_usuario && <p className='errors'>{errors.id_usuario.message}</p>}
+                <label htmlFor="id_usuario">Responsável:</label>
+                <select id="id_usuario" {...register("id_usuario")} required defaultValue="">
+                <option value="" disabled>Selecione</option>
+                {usuarios.map((user) => (
+                    <option key={user.id} value={user.id}>{user.nome}</option>
+                ))}
+                </select>
 
-            <button type='submit'>Cadastrar</button>
-        </form>
+                {errors.id_usuario && <p className="errors">{errors.id_usuario.message}</p>}
+
+                <button type="submit">Cadastrar</button>
+            </form>
+        </section>
+
+
     )
 }

@@ -2,7 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Coluna } from "./Coluna";
 import {DndContext} from '@dnd-kit/core'; // qual é o ambiente que vai permitir o darg and drop
+import { restrictToFirstScrollableAncestor } from '@dnd-kit/modifiers';
 
+
+/*
+
+Esse componente é utilizado para o quadro das 
+colunas que contém as tarefas. Também compõe
+a função de drag paras as colunas.
+
+*/
 export function Quadro() {
     const [tarefas, setTarefas] = useState([]);
 
@@ -49,10 +58,10 @@ export function Quadro() {
 
     return (
 
-        <DndContext onDragEnd={handleDragEnd}>
+        <DndContext onDragEnd={handleDragEnd} modifiers={[restrictToFirstScrollableAncestor]}>
         <main className="conteiner" aria-label="Quadro que contém as tarefas sendo eles as colunas A fazer, Fazendo e Pronto">
-            <h1>Meu Quadro</h1>
-            <section>
+            <h1 className="inicialTitulo">Meu Quadro</h1>
+            <section >
             <Coluna id = "AF" titulo="A Fazer" tarefas={tarefasAfazer} />
             <Coluna id = "F" titulo="Fazendo" tarefas={tarefasAFazendo} />
             <Coluna id = "P" titulo="Pronto" tarefas={tarefasAPronto} />

@@ -1,0 +1,12 @@
+@use './variaveis.scss' as *;
+
+
+footer{
+    background-color: $backgrond;
+    padding: 1.5rem;
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $accent;
+}

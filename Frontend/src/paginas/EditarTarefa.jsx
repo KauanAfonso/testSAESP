@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const schemaEditarTarefas = z.object({
@@ -47,7 +48,8 @@ export function EditarTarefa() {
     try {
       await axios.patch(`http://127.0.0.1:8000/api/tarefas/${id}/`, payload);
       alert('Tarefa editada com sucesso');
-    } catch (err) {
+      location.href = '/'
+      } catch (err) {
       console.error('Deu ruim', err);
       alert('Houve um erro ao editar a tarefa');
     }
@@ -57,16 +59,17 @@ export function EditarTarefa() {
 
   return (
     <section>
-      <h2>Editar Tarefa</h2>
-      <form onSubmit={handleSubmit(salvarEdicao)} className='formularios'>
-        <label>Descrição:</label>
-        <textarea value={tarefa.descricao} readOnly />
+      <h2 className='inicialTitulo'>Editar Tarefa</h2>
+      <form onSubmit={handleSubmit(salvarEdicao)} className="formularios">
 
-        <label>Setor:</label>
-        <input type="text" value={tarefa.nomeSala} readOnly />
+        <label htmlFor="descricao">Descrição:</label>
+        <input style={{color:'gray'}} id="descricao" value={tarefa.descricao} readOnly/>
 
-        <label>Prioridade:</label>
-        <select {...register('prioridade')}>
+        <label htmlFor="setor">Setor:</label>
+        <input id="setor" style={{color:'gray'}} type="text" value={tarefa.nomeSala} readOnly />
+
+        <label htmlFor="prioridade">Prioridade:</label>
+        <select id="prioridade" {...register('prioridade')}>
           <option value="">Selecione</option>
           <option value="Baixa">Baixa</option>
           <option value="Média">Média</option>
@@ -74,8 +77,8 @@ export function EditarTarefa() {
         </select>
         {errors.prioridade && <p>{errors.prioridade.message}</p>}
 
-        <label>Status:</label>
-        <select {...register('status')}>
+        <label htmlFor="status">Status:</label>
+        <select id="status" {...register('status')}>
           <option value="">Selecione</option>
           <option value="A fazer">A fazer</option>
           <option value="Fazendo">Fazendo</option>
@@ -86,5 +89,6 @@ export function EditarTarefa() {
         <button type="submit">Editar</button>
       </form>
     </section>
+
   );
 }

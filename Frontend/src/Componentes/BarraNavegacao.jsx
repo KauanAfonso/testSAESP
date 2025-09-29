@@ -1,12 +1,18 @@
 import { Link } from "react-router";
 
+
+/* 
+
+Esse componente é a barra de navegação do site
+
+*/
 export function BarraNavegacao(){
     return(
         <nav className="barra">
             <ul>
-                <Link to ='/cadUsuario'><li >Cadastro de Usuário</li></Link>
-                <Link to='cadTarefa'><li>Cadasro de Tarefa</li></Link>
-                <Link to='/'><li>Gerenciamento de Tarefas</li></Link>
+                <li><Link to ='/cadUsuario'>Cadastro de Usuário</Link></li>
+                <li><Link to='cadTarefa'>Cadastro de Tarefa</Link></li>
+                <li><Link to='/'>Gerenciamento de Tarefas</Link></li>
             </ul>
         </nav>
     )

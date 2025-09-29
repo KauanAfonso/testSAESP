@@ -3,9 +3,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDraggable } from '@dnd-kit/core';
 
+
+
+/*Esse componente é para */
 export function Tarefa({ tarefa }) {
   const navigate = useNavigate();
   const [status, setStatus] = useState(tarefa.status);
+
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: tarefa.id, // Garante que seja uma string
@@ -48,26 +52,43 @@ export function Tarefa({ tarefa }) {
 
 
   return (
-    <article className="formularios tarefa" ref={setNodeRef} style={style} 
+    <article className="formularios tarefa" ref={setNodeRef} style={style}  
     {...attributes}>
 
       {/*o ..listeners é o ouvinte que esta esperando ser 'drag' */}
       <section className='secitionA1' {...listeners}>
         <h3 id={`tarefa-${tarefa.id}`}>{tarefa.descricao}</h3>
+
+        <section style={{display:"flex", gap:'1rem'}} >
         <dl>
-          <dt>Setor:</dt>
+          <dt>Setor: </dt>
           <dd>{tarefa.nomeSala}</dd>
         </dl>
 
+        <dl>
+          <dt>Prioridade: </dt>
+          <dd>
+            {tarefa.prioridade === 'A' ? 'Alta' :
+            tarefa.prioridade === 'M' ? 'Média' :
+            tarefa.prioridade === 'B' ? 'Baixa' :
+            'N/A'}
+          </dd>
+        </dl>
+        </section>
+
+
       </section>
       
+      <section className='buttons_section'>
+        <button onClick={() => navigate(`/editarTarefa/${tarefa.id}`)}>Editar</button>
+        <button onClick={() => exclusaoTarefa(tarefa.id)}>Excluir</button>
+      </section>
 
-      <button onClick={() => navigate(`/editarTarefa/${tarefa.id}`)}>Editar</button>
-      <button onClick={() => exclusaoTarefa(tarefa.id)}>Excluir</button>
 
-      <form>
-        <label>Status: </label>
-        <select aria-label='Selecione o status da tarefa'
+      <form {...listeners}>
+        <label htmlFor='status'>Status: </label>
+        <section>
+        <select id='status' aria-label='Selecione o status da tarefa'
           name="status"
           value={status}
           onChange={(e) => setStatus(e.target.value)}
@@ -77,6 +98,8 @@ export function Tarefa({ tarefa }) {
           <option value="F">Fazendo</option>
           <option value="P">Pronto</option>
         </select>
+        </section>
+
       </form>
 
       <button onClick={alterarStatus}>Alterar Status</button>

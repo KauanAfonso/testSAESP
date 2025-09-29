@@ -5,11 +5,26 @@
   margin-bottom: 1rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: box-shadow 0.3s ease;
-  width: 20rem;
+  width: 19rem;
+  padding: 3rem;
 
+  .buttons_section{
+    display: flex;
+    // justify-content: center;
+
+      button{
+         width: 6rem !important;
+         padding: .6rem;
+      }
+  }
+
+  button{
+    width: 100%;
+  }
+  
+  
   button:nth-of-type(2){
     background-color: rgb(182, 33, 33);
-    
   }
 
   .secitionA1{
