@@ -60,7 +60,7 @@ export function CadUsuario() {
         //para grande parte das interações com outra plataforma é nescessario usar o try
         try {
             await axios.post("http://127.0.0.1:8000/api/usuario/", data);
-            alert("Usuário cadastrado com sucesso");
+            console.log("Usuário cadastrado com sucesso");
             reset(); //limpeza do formulario
         } catch (error) {
             alert("È não rolou na proxima talvez");
@@ -72,14 +72,14 @@ export function CadUsuario() {
     return (
         <section>
         <h2 className='inicialTitulo'> Cadastro do Usuário</h2> 
-        <form className="formularios" onSubmit={handleSubmit(obterdados)}>
+        <form role='form' className="formularios" onSubmit={handleSubmit(obterdados)}>
             <label htmlFor='nome'>Nome:</label>
             <input type='text' id='nome' onChange={handleNomeChange} placeholder='Jose da Silva' {...register("nome")} />
             {/* aqui eu vejo a variavel errors no campo nome exibo a mensagem para o usuário */}
             {errors.nome && <p className='errors'>{errors.nome.message}</p>}
 
             <label htmlFor='email'>E-mail</label>
-            <input type='email' id='email' onChange={handleEmailChange} placeholder='email@email.com' {...register("email")} />
+            <input type='text' id='email' onChange={handleEmailChange} placeholder='email@email.com' {...register("email")} />
             
             {errors.email && <p className='errors'>{errors.email.message}</p>}
 
