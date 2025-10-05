@@ -64,3 +64,70 @@ it("deve resetar os campos após submissão", async () => {
     });
 
 });
+
+
+let nomeGrande = "A".repeat(51);
+let emailGrande = "a".repeat(51) + "@email.com";
+//passou
+it("Deve informar erro de limite de caracteres", async () => {
+    render(<CadUsuario />);
+    fireEvent.input(screen.getByLabelText(/Nome/i), { target: { value: nomeGrande } });
+    fireEvent.input(screen.getByLabelText(/E-mail/i), { target: { value: emailGrande } });
+
+    fireEvent.submit(screen.getByRole("form") || screen.getByRole("button", { name:/Cadastrar/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Insira até 30 caracteres/i)).toBeTruthy();
+      expect(screen.getByText(/Insira um endereço de email com até 30 carateres/i)).toBeTruthy();
+    });
+  });
+
+
+//passou
+it("Deve informar erro de caracteres especiais", async () => {
+    render(<CadUsuario />);
+    fireEvent.input(screen.getByLabelText(/Nome/i), { target: { value: 'Kaunan&& af@ons!' } });
+
+    fireEvent.submit(screen.getByRole("form") || screen.getByRole("button", { name:/Cadastrar/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Digite nome completo \(nome e sobrenome\), sem números ou símbolos, sem espaços no início\/fim/i)).toBeTruthy();
+    });
+  });
+
+//passou
+it("Deve informar erro de espaçamento", async () => {
+    render(<CadUsuario />);
+    fireEvent.input(screen.getByLabelText(/Nome/i), { target: { value: "          fer         " } });
+    
+    fireEvent.submit(screen.getByRole("form") || screen.getByRole("button", { name:/Cadastrar/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Digite nome completo \(nome e sobrenome\), sem números ou símbolos, sem espaços no início\/fim/i)).toBeTruthy();
+    });
+  });
+
+//passou
+it("Deve informar erro de sem espaços em brancos", async () => {
+    render(<CadUsuario />);
+    fireEvent.input(screen.getByLabelText(/Nome/i), { target: { value: "            " } });
+    
+    fireEvent.submit(screen.getByRole("form") || screen.getByRole("button", { name:/Cadastrar/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Digite nome completo \(nome e sobrenome\), sem números ou símbolos, sem espaços no início\/fim/i)).toBeTruthy();
+    });
+  });
+
+
+//passou
+it("Deve informar erro de sem espaços em números no nome", async () => {
+    render(<CadUsuario />);
+    fireEvent.input(screen.getByLabelText(/Nome/i), { target: { value: "kauan879" } });
+    
+    fireEvent.submit(screen.getByRole("form") || screen.getByRole("button", { name:/Cadastrar/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Digite nome completo \(nome e sobrenome\), sem números ou símbolos, sem espaços no início\/fim/i)).toBeTruthy();
+    });
+  });

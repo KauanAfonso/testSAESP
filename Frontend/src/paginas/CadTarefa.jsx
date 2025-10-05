@@ -83,10 +83,10 @@ export function CadTarefa() {
     return (
         <section>
             <h2 className='inicialTitulo'>Cadastro de Tarefas</h2>
-            <form className="formularios" onSubmit={handleSubmit(obterdados)}>
+            <form role='form' className="formularios" onSubmit={handleSubmit(obterdados)}>
 
                 <label htmlFor="descricao">Descrição da Tarefa:</label>
-                <input id="descricao" type="text" placeholder="Descrição da tarefa" {...register("descricao")} required />
+                <input id="descricao" name='descricao' type="text" placeholder="Descrição da tarefa" {...register("descricao")} required />
                 {errors.descricao && <p className="errors">{errors.descricao.message}</p>}
 
                 <label htmlFor="nomeSala">Nome da sala:</label>
@@ -123,7 +123,7 @@ export function CadTarefa() {
 
                 {errors.id_usuario && <p className="errors">{errors.id_usuario.message}</p>}
 
-                <button type="submit">Cadastrar</button>
+                <button name='Cadastrar' type="submit">Cadastrar</button>
             </form>
         </section>
 
