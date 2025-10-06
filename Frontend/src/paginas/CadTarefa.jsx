@@ -56,7 +56,7 @@ export function CadTarefa() {
         //para grande parte das interações com outra plataforma é nescessario usar o try
         try {
             await axios.post("http://127.0.0.1:8000/api/tarefas/", data);
-            alert("Tarefa cadastrado com sucesso");
+            // alert("Tarefa cadastrado com sucesso");
             reset(); //limpeza do formulario
         } catch (error) {
             alert("È não rolou na proxima talvez");
@@ -86,11 +86,11 @@ export function CadTarefa() {
             <form role='form' className="formularios" onSubmit={handleSubmit(obterdados)}>
 
                 <label htmlFor="descricao">Descrição da Tarefa:</label>
-                <input id="descricao" name='descricao' type="text" placeholder="Descrição da tarefa" {...register("descricao")} required />
+                <input id="descricao" name='descricao' type="text" placeholder="Descrição da tarefa" {...register("descricao")}  />
                 {errors.descricao && <p className="errors">{errors.descricao.message}</p>}
 
                 <label htmlFor="nomeSala">Nome da sala:</label>
-                <input id="nomeSala" type="text" placeholder="A102" {...register("nomeSala")} required />
+                <input id="nomeSala" type="text" placeholder="A102" {...register("nomeSala")}  />
                 {errors.nomeSala && <p className="errors">{errors.nomeSala.message}</p>}
 
                 <label htmlFor="prioridade">Defina prioridade:</label>
@@ -123,7 +123,7 @@ export function CadTarefa() {
 
                 {errors.id_usuario && <p className="errors">{errors.id_usuario.message}</p>}
 
-                <button name='Cadastrar' type="submit">Cadastrar</button>
+                <button id='Cadastrar' role='button' name='Cadastrar' type="submit">Cadastrar</button>
             </form>
         </section>
 
