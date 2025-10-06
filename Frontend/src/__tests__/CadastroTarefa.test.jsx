@@ -145,7 +145,6 @@ it("Deve mostrar erro de data inválida", async () => {
 });
 
 
-
 it("Deve mostrar erro de data formtado de data inválido YYYY-MM-DD", async () => {
     render(<CadTarefa/>);
     const descricaoInput = screen.getByLabelText(/Descrição/i)
@@ -268,7 +267,7 @@ it("Deve mostrar erros de espaçamento em setor", async () => {
     fireEvent.input(nome_sala, { target: { value: " A545" } });
     fireEvent.input(dataCadastroInput, { target: { value: "2022-10-05" } });
     fireEvent.input(prioridadeInput, { target: { value: "A" } });
-    fireEvent.input(statusInput, { target: { value: "AF" } });
+    fireEvent.input(statusInput, { target: { value: "AF" } }); 
     fireEvent.input(id_usuarioInput, { target: { value: "15" } });
 
     fireEvent.submit(screen.getByRole("form") || screen.getByRole("button", { name:/Cadastrar/i }));

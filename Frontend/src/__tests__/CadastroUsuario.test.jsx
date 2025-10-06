@@ -120,6 +120,23 @@ it("Deve informar erro de sem espaços em brancos", async () => {
   });
 
 
+it("Deve aceitar acento no nome do usuário", async()=>{
+    render(<CadUsuario />);
+    let nomeInput = screen.getByLabelText(/Nome/i)
+    let emailInput = screen.getByLabelText(/E-mail/i)
+
+    fireEvent.input(nomeInput, { target: { value: "Kauan Âfonso" } });
+    fireEvent.input(emailInput, { target: { value: "kauan@gmail.com" } });
+    
+    fireEvent.submit(screen.getByRole("form") || screen.getByRole("button", { name:/Cadastrar/i }));
+
+    await waitFor(() => {
+      expect(nomeInput.value).toBe("");
+      expect(emailInput.value).toBe("");
+    });
+  });
+
+
 //passou
 it("Deve informar erro de sem espaços em números no nome", async () => {
     render(<CadUsuario />);
