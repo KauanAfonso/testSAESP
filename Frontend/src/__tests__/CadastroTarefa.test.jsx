@@ -253,6 +253,61 @@ it("Deve mostrar erros de espaçamento em descrição", async () => {
 
 
 
+it("Deve mostrar erros de tamanho de caracteres ao colocar uma letra de música da xuxa em descrição:", async () => {
+    render(<CadTarefa/>);
+    const descricaoInput = screen.getByLabelText(/Descrição/i)
+    const nome_sala = screen.getByLabelText(/nome da sala/i)
+    const prioridadeInput = screen.getByLabelText(/prioridade/i)
+    const statusInput = screen.getByLabelText(/status/i)
+    const dataCadastroInput = screen.getByLabelText(/Data da tarefa/i)
+    const id_usuarioInput = screen.getByLabelText(/Responsável/i)
+
+
+    fireEvent.input(descricaoInput, { target: { value: musica_xuxa} });
+    fireEvent.input(nome_sala, { target: { value: "A545" } });
+    fireEvent.input(dataCadastroInput, { target: { value: "2022-10-05" } });
+    fireEvent.input(prioridadeInput, { target: { value: "A" } });
+    fireEvent.input(statusInput, { target: { value: "AF" } }); 
+    fireEvent.input(id_usuarioInput, { target: { value: "15" } });
+
+    fireEvent.submit(screen.getByRole("form") || screen.getByRole("button", { name:/Cadastrar/i }));
+
+    await waitFor(() => {
+        expect(screen.getByText(/Insira até 100 caracteres/i)).toBeTruthy()
+
+    });
+
+})
+
+
+
+it("Deve mostrar erros de tamanho de caracteres ao colocar uma letra de música da xuxa em descrição:", async () => {
+    render(<CadTarefa/>);
+    const descricaoInput = screen.getByLabelText(/Descrição/i)
+    const nome_sala = screen.getByLabelText(/nome da sala/i)
+    const prioridadeInput = screen.getByLabelText(/prioridade/i)
+    const statusInput = screen.getByLabelText(/status/i)
+    const dataCadastroInput = screen.getByLabelText(/Data da tarefa/i)
+    const id_usuarioInput = screen.getByLabelText(/Responsável/i)
+
+
+    fireEvent.input(descricaoInput, { target: { value: "kauan"} });
+    fireEvent.input(nome_sala, { target: { value: musica_xuxa } });
+    fireEvent.input(dataCadastroInput, { target: { value: "2022-10-05" } });
+    fireEvent.input(prioridadeInput, { target: { value: "A" } });
+    fireEvent.input(statusInput, { target: { value: "AF" } }); 
+    fireEvent.input(id_usuarioInput, { target: { value: "15" } });
+
+    fireEvent.submit(screen.getByRole("form") || screen.getByRole("button", { name:/Cadastrar/i }));
+
+    await waitFor(() => {
+        expect(screen.getByText(/Insira o setor com até 50 carateres/i)).toBeTruthy()
+
+    });
+
+})
+
+
 it("Deve mostrar erros de espaçamento em setor", async () => {
     render(<CadTarefa/>);
     const descricaoInput = screen.getByLabelText(/Descrição/i)
@@ -276,12 +331,81 @@ it("Deve mostrar erros de espaçamento em setor", async () => {
         expect(screen.getByText(/Não comece com espaço em branco/i)).toBeTruthy()
 
     });
-    
 });
 
 
 
 
 
+let musica_xuxa = `Hoje vai ser uma festa
+Bolo e guaraná
+Muito doce pra você
+É o seu aniversário
+Vamos festejar
+E os amigos receber
 
+Mil felicidades
+E amor no coração
+Que a sua vida seja
+Sempre doce e emoção
 
+Bate, bate palma
+Que é hora de cantar
+Agora todos juntos
+Vamos lá!
+
+Parabéns, parabéns!
+Hoje é o seu dia
+Que dia mais feliz
+
+Parabéns, parabéns!
+Cante novamente
+Que a gente pede bis
+
+É big, é big
+É big, é big, é big
+É hora, é hora
+É hora, é hora, é hora
+Rá-tim-bum!
+
+Hoje vai ser uma festa
+Bolo e guaraná
+Muito doce pra você
+
+É o seu aniversário
+Vamos festejar
+E os amigos receber
+
+Mil felicidades
+E amor no coração
+Que a sua vida seja
+Sempre doce e emoção
+
+Bate, bate palma
+Que é hora de cantar
+Agora todos juntos
+Vamos lá!
+
+Parabéns, parabéns!
+Hoje é o seu dia
+Que dia mais feliz
+
+Parabéns, parabéns!
+Cante novamente
+Que a gente pede bis
+
+Parabéns, parabéns!
+Hoje é o seu dia
+Que dia mais feliz
+
+Parabéns, parabéns!
+Cante novamente
+Que a gente pede bis
+
+Parabéns, parabéns!
+Hoje é o seu dia
+Que dia mais feliz
+
+Parabéns, parabéns!
+Cante novamente
+Que a gente pede bis`;
